@@ -1,29 +1,35 @@
 #language: es
 
-Característica: Funcionamiento de la calculadora de crédito
+Característica: Funcionamiento de la calculadora de credito
 
-  Esquema del escenario: Pedro quiere saber cuánto dinero le prestan según el total de sus ingresos mensuales
+  Escenario: Pedro quiere saber cuánto dinero le prestan con ingresos mensuales altos y con el plazo mínimo
     Dado que Pedro está en la calculadora de crédito de metrocuadrado
     Y elige la alternativa Calcula cuánto te prestan
-    Cuando selecciona calcular el crédito teniendo ingresos mensuales de <ingresos> y plazo <limite tiempo>
-    Entonces obtendrá las características de su préstamo con valores del inmueble <valor vivienda>, préstamo bancario <valor préstamo>, cuota inicial <cuota inicial> y cuota mensual <cuota mensual>
+    Cuando selecciona calcular el crédito teniendo ingresos mensuales de 25000000 y plazo 5 Años
+    Entonces obtendrá las características de su préstamo de acuerdo a sus ingresos y plazo
+      | valor_vivienda  | valor_prestamo | cuota_inicial  |cuota_mensual |
+      |  $ 506,640,748  | $ 354,648,524  | $ 151,992,224  | $ 7,500,000  |
 
-    Ejemplos:
-      | ingresos  | limite tiempo |   valor vivienda    | valor préstamo | cuota inicial |cuota mensual |
-      | 15000000  | 5 Años        |   $ 303,984,449     | $ 212,789,114  | $ 91,195,335  | $ 4,500,000  |
-      | 19000000  | 10 Años       |   $ 621,432,406     | $ 435,002,684  | $ 186,429,722 | $ 5,700,000  |
-      | 22000000  | 15 Años       |   $ 887,587,173     | $ 621,311,021  | $ 266,276,152 | $ 6,600,000  |
-      | 25000000  | 20 Años       |   $ 1,125,847,031   | $ 788,092,922  | $ 337,754,109 | $ 7,500,000  |
+  Escenario: Pedro quiere saber cuánto dinero le prestan con ingresos mensuales bajos y con el plazo maximo
+    Dado que Pedro está en la calculadora de crédito de metrocuadrado
+    Y elige la alternativa Calcula cuánto te prestan
+    Cuando selecciona calcular el crédito teniendo ingresos mensuales de 15000000 y plazo 20 Años
+    Entonces obtendrá las características de su préstamo de acuerdo a sus ingresos y plazo
+      | valor_vivienda  | valor_prestamo | cuota_inicial  |cuota_mensual |
+      |   $ 675,508,219 | $ 472,855,753  | $ 202,652,466  | $ 4,500,000  |
 
-  Esquema del escenario: Pedro quiere saber el valor de su cuota mensual según el monto del crédito solicitado
+  Escenario: Pedro quiere saber el valor de su cuota mensual cuando el monto es alto y el plazo corto
     Dado que Pedro está en la calculadora de crédito de metrocuadrado
     Y elige la alternativa Calcula el valor de las cuotas
-    Cuando calcula las cuotas con un valor del crédito de <total crédito> y plazo <limite tiempo>
-    Entonces obtendrá las características de su cuota con los valores del inmueble <valor vivienda>, préstamo bancario <valor préstamo>, cuota inicial <valor cuota inicial> y los ingresos mensuales <ingresos>
+    Cuando calcula las cuotas con un valor del crédito de 790000000 y plazo 5 Años
+    Entonces obtendrá las características de su cuota mensual
+      |   valor_vivienda    | valor_prestamo | cuota_inicial | ingresos      |
+      |   $ 1,128,571,429   | $ 782,427,749  | $ 338,571,429 | $ 55,688,939  |
 
-    Ejemplos:
-      | total crédito | limite tiempo   |   valor vivienda    | valor préstamo | valor cuota inicial | ingresos      |
-      | 283000000     | 5 Años          |   $ 404,285,714     | $ 280,287,409  | $ 121,285,714       | $ 19,949,329  |
-      | 435000000     | 10 Años         |   $ 621,428,571     | $ 427,454,596  | $ 186,428,571       | $ 18,999,883  |
-      | 622000000     | 15 Años         |   $ 888,571,429     | $ 607,325,829  | $ 266,571,429       | $ 22,024,396  |
-      | 790000000     | 20 Años         |   $ 1,128,571,429   | $ 767,482,951  | $ 338,571,429       | $ 25,060,497  |
+  Escenario: Pedro quiere saber el valor de su cuota mensual cuando el monto es corto y el plazo alto
+    Dado que Pedro está en la calculadora de crédito de metrocuadrado
+    Y elige la alternativa Calcula el valor de las cuotas
+    Cuando calcula las cuotas con un valor del crédito de 283000000 y plazo 20 Años
+    Entonces obtendrá las características de su cuota mensual
+      |   valor_vivienda    | valor_prestamo | cuota_inicial | ingresos      |
+      |   $ 404,285,714     | $ 274,933,766  | $ 121,285,714 | $ 8,977,368   |

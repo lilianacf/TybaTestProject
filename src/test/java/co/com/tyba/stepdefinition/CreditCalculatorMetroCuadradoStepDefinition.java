@@ -1,6 +1,6 @@
 package co.com.tyba.stepdefinition;
 
-import static co.com.tyba.utils.Environment.CREDIT_CALCULATOR;
+import static co.com.tyba.utils.Environment.METRO_CUADRADO_CREDIT_CALCULATOR;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -23,6 +23,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.List;
+import java.util.Map;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
 public class CreditCalculatorMetroCuadradoStepDefinition {
@@ -34,7 +36,7 @@ public class CreditCalculatorMetroCuadradoStepDefinition {
 
   @Given("^que (.*) está en la calculadora de crédito de metrocuadrado$")
   public void theActorEntersTheCalculatorWebPortal(String actorsName) {
-    theActorCalled(actorsName).wasAbleTo(OpenPage.openUrl(CREDIT_CALCULATOR.Url()));
+    theActorCalled(actorsName).wasAbleTo(OpenPage.openUrl(METRO_CUADRADO_CREDIT_CALCULATOR.Url()));
   }
 
   @Given("^elige la alternativa (.*)$")
@@ -47,19 +49,14 @@ public class CreditCalculatorMetroCuadradoStepDefinition {
     theActorInTheSpotlight().attemptsTo(CalculateCredit.amounts(monthlyIncome, paymentTerm));
   }
 
-  @Then(
-      "^obtendrá las características de su préstamo con valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y cuota mensual (.*)$")
-  public void heWillKnowTheCreditConditions(
-      String propertyValue,
-      String bankLoanValue,
-      String minimumInitialFeeValue,
-      String monthlyFeeValue) {
+  @Then("^obtendrá las características de su préstamo de acuerdo a sus ingresos y plazo$")
+  public void heWillKnowTheCreditConditions(List<Map<String, String>> data) {
     theActorInTheSpotlight()
         .should(
-            seeThat(PropertyValue.getValue(), is(propertyValue)),
-            seeThat(BankLendingValue.getValue(), is(bankLoanValue)),
-            seeThat(LeastInitialShareValue.getValue(), is(minimumInitialFeeValue)),
-            seeThat(MonthlyShareValue.getValue(), is(monthlyFeeValue)));
+            seeThat(PropertyValue.getValue(), is(data.get(0).get("valor_vivienda"))),
+            seeThat(BankLendingValue.getValue(), is(data.get(0).get("valor_prestamo"))),
+            seeThat(LeastInitialShareValue.getValue(), is(data.get(0).get("cuota_inicial"))),
+            seeThat(MonthlyShareValue.getValue(), is(data.get(0).get("cuota_mensual"))));
   }
 
   @When("^calcula las cuotas con un valor del crédito de (.*) y plazo (.*)$")
@@ -68,15 +65,13 @@ public class CreditCalculatorMetroCuadradoStepDefinition {
     theActorInTheSpotlight().attemptsTo(CalculateShares.ofCredit(creditValue, paymentTerm));
   }
 
-  @Then(
-      "^obtendrá las características de su cuota con los valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y los ingresos mensuales (.*)$")
-  public void heCanSeeTheAmountOfFeesAndTheCreditConditions(
-      String propertyValue, String loanValue, String initialFeeValue, String minimumIncome) {
+  @Then("^obtendrá las características de su cuota mensual$")
+  public void heCanSeeTheAmountOfFeesAndTheCreditConditions(List<Map<String, String>> data) {
     theActorInTheSpotlight()
         .should(
-            seeThat(PropertyValueShare.getValue(), is(propertyValue)),
-            seeThat(LendingValue.getValue(), is(loanValue)),
-            seeThat(InitialShareValue.getValue(), is(initialFeeValue)),
-            seeThat(LeastIncomeValue.getValue(), is(minimumIncome)));
+            seeThat(PropertyValueShare.getValue(), is(data.get(0).get("valor_vivienda"))),
+            seeThat(LendingValue.getValue(), is(data.get(0).get("valor_prestamo"))),
+            seeThat(InitialShareValue.getValue(), is(data.get(0).get("cuota_inicial"))),
+            seeThat(LeastIncomeValue.getValue(), is(data.get(0).get("ingresos"))));
   }
 }
