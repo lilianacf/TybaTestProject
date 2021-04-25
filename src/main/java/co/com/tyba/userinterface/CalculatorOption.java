@@ -9,7 +9,7 @@ public class CalculatorOption {
       Target.the("amount calculator button")
           .located(By.xpath("//a[contains(text(), 'cuánto te prestan')]"));
 
-  public static final Target BTN_FEE_CALCULATOR =
-      Target.the("fee calculator button")
+  public static final Target BTN_SHARE_CALCULATOR =
+      Target.the("share calculator button")
           .located(By.xpath("//a[contains(text(), 'Calcula el valor de las')]"));
 }

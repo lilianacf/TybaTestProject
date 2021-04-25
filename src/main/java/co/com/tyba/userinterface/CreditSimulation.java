@@ -15,14 +15,14 @@ public class CreditSimulation {
               By.xpath(
                   "//div[@ng-show = 'showLoanInfo']//span[contains(text(),'Un banco puede prestarte')]/../following-sibling::dd[@class='ng-binding']"));
 
-  public static final Target LBL_INITIAL_FEE_AMOUNT_CALCULATOR =
+  public static final Target LBL_INITIAL_SHARE_AMOUNT_CALCULATOR =
       Target.the("Value You must have a minimum down payment of")
           .located(
               By.xpath(
                   "//div[@ng-show = 'showLoanInfo']//span[contains(text(),'Debe tener una cuota inicial')]/../following-sibling::dd[@class='ng-binding']"));
 
-  public static final Target LBL_TOTAL_CREDIT_VALUE_FEE_CALCULATOR =
-      Target.the("Value you can buy a property from, Fee Calculator")
+  public static final Target LBL_TOTAL_CREDIT_VALUE_SHARE_CALCULATOR =
+      Target.the("Value you can buy a property from, Share Calculator")
           .located(
               By.xpath("//div[@ng-show = 'showLoanInfoByQuota']//dd[@class='valor ng-binding']"));
 
@@ -32,17 +32,13 @@ public class CreditSimulation {
               By.xpath(
                   "//div[@ng-show = 'showLoanInfoByQuota']//span[contains(text(),'Debes tener ingresos mensuales')]/../following-sibling::dd[@class='ng-binding']"));
 
-  public static final Target LBL_INITIAL_FEE_CALCULATOR =
-      Target.the("Value You must have a minimum initial fee of")
+  public static final Target LBL_INITIAL_SHARE_CALCULATOR =
+      Target.the("Value You must have a minimum initial share of")
           .located(
               By.xpath(
                   "//div[@ng-show = 'showLoanInfoByQuota']//span[contains(text(),'Debes tener una cuota inicial')]/../following-sibling::dd[@class='ng-binding']"));
 
-  public static final Target LBL_AMOUNT_FEE_CALCULATOR =
-      Target.the("Value of the monthly fee")
+  public static final Target LBL_AMOUNT_SHARE_CALCULATOR =
+      Target.the("Value of the monthly share")
           .located(By.xpath("//td[@ng-class=\"{'valor_result2': bank.state == 'S'}\"]//br/.."));
-
-  public static final Target LBL_AMOUNT_FEE_AMOUNT_CALCULATOR =
-      Target.the("Value of the monthly fee, fee calculator")
-          .located(By.xpath("//td[@ng-class=\"{'valor_result': bank.state == 'S'}\"]//br/.."));
 }

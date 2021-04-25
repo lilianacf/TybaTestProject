@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-    features = "src/test/resources/features/credit_calculator.feature",
+    features = "src/test/resources/features/credit_calculator_metro_cuadrado.feature",
     glue = "co.com.tyba.stepdefinition",
     snippets = SnippetType.CAMELCASE)
-public class CreditCalculatorRunner {}
+public class CreditCalculatorMetroCuadradoRunner {}

@@ -6,11 +6,11 @@ import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Open;
 import net.thucydides.core.annotations.Step;
 
-public class OpenWeb implements Task {
+public class OpenPage implements Task {
 
   private String url;
 
-  public OpenWeb(String url) {
+  public OpenPage(String url) {
     this.url = url;
   }
 
@@ -20,7 +20,7 @@ public class OpenWeb implements Task {
     actor.attemptsTo(Open.url(url));
   }
 
-  public static OpenWeb openUrl(String url) {
-    return Tasks.instrumented(OpenWeb.class, url);
+  public static OpenPage openUrl(String url) {
+    return Tasks.instrumented(OpenPage.class, url);
   }
 }

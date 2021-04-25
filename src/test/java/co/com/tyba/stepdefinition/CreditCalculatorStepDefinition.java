@@ -7,18 +7,18 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
-import co.com.tyba.question.calculationfees.InitialFeeValue;
-import co.com.tyba.question.calculationfees.LoanValue;
-import co.com.tyba.question.calculationfees.MinimumIncomeValue;
-import co.com.tyba.question.calculationfees.PropertyValueFee;
-import co.com.tyba.question.creditcalculation.BankLoanValue;
-import co.com.tyba.question.creditcalculation.MinimumInitialFeeValue;
-import co.com.tyba.question.creditcalculation.MonthlyFeeValue;
-import co.com.tyba.question.creditcalculation.PropertyValue;
+import co.com.tyba.question.BankLoanValue;
+import co.com.tyba.question.InitialShareValue;
+import co.com.tyba.question.LoanValue;
+import co.com.tyba.question.MinimumIncomeValue;
+import co.com.tyba.question.MinimumInitialShareValue;
+import co.com.tyba.question.MonthlyShareValue;
+import co.com.tyba.question.PropertyValue;
+import co.com.tyba.question.PropertyValueShare;
 import co.com.tyba.task.CalculateCredit;
-import co.com.tyba.task.CalculateFees;
-import co.com.tyba.task.OpenTheMenu;
-import co.com.tyba.task.OpenWeb;
+import co.com.tyba.task.CalculateShares;
+import co.com.tyba.task.OpenMenu;
+import co.com.tyba.task.OpenPage;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -32,23 +32,23 @@ public class CreditCalculatorStepDefinition {
     setTheStage(new OnlineCast());
   }
 
-  @Given("^(.*) ingresa la calculadora de crédito para vivienda de metrocuadrado.com$")
+  @Given("^que (.*) está en la calculadora de credito de metrocuadrado$")
   public void theActorEntersTheCalculatorWebPortal(String actorsName) {
-    theActorCalled(actorsName).wasAbleTo(OpenWeb.openUrl(CREDIT_CALCULATOR.Url()));
+    theActorCalled(actorsName).wasAbleTo(OpenPage.openUrl(CREDIT_CALCULATOR.Url()));
   }
 
-  @Given("^selecciona la opción (.*)$")
+  @Given("^elige la alternativa (.*)$")
   public void heOpensTheAmountsCalculator(String option) {
-    theActorInTheSpotlight().attemptsTo(OpenTheMenu.option(option));
+    theActorInTheSpotlight().attemptsTo(OpenMenu.option(option));
   }
 
-  @When("calcula el crédito con ingresos mensuales de (.*) y plazo (.*)$")
+  @When("selecciona calcular el crédito teniendo ingresos mensuales de (.*) y plazo (.*)$")
   public void heEntersTheValueOfHisIncomeAndThePayment(long monthlyIncome, String paymentTerm) {
     theActorInTheSpotlight().attemptsTo(CalculateCredit.amounts(monthlyIncome, paymentTerm));
   }
 
   @Then(
-      "^podrá ver los valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y cuota mensual (.*)$")
+      "^obtendrá las características de su prestamo con valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y cuota mensual (.*)$")
   public void heWillKnowTheCreditConditions(
       String propertyValue,
       String bankLoanValue,
@@ -58,25 +58,25 @@ public class CreditCalculatorStepDefinition {
         .should(
             seeThat(PropertyValue.getValue(), is(propertyValue)),
             seeThat(BankLoanValue.getValue(), is(bankLoanValue)),
-            seeThat(MinimumInitialFeeValue.getValue(), is(minimumInitialFeeValue)),
-            seeThat(MonthlyFeeValue.getValue(), is(monthlyFeeValue)));
+            seeThat(MinimumInitialShareValue.getValue(), is(minimumInitialFeeValue)),
+            seeThat(MonthlyShareValue.getValue(), is(monthlyFeeValue)));
   }
 
   @When("^calcula las cuotas con un valor del crédito de (.*) y plazo (.*)$")
   public void heEntersTheCreditValueThePaymentAndTheInterestRate(
       long creditValue, String paymentTerm) {
-    theActorInTheSpotlight().attemptsTo(CalculateFees.ofCredit(creditValue, paymentTerm));
+    theActorInTheSpotlight().attemptsTo(CalculateShares.ofCredit(creditValue, paymentTerm));
   }
 
   @Then(
-      "^podrá ver los valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y los ingresos mensuales (.*)$")
+      "^obtendrá las características de su cuota con los valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y los ingresos mensuales (.*)$")
   public void heCanSeeTheAmountOfFeesAndTheCreditConditions(
       String propertyValue, String loanValue, String initialFeeValue, String minimumIncome) {
     theActorInTheSpotlight()
         .should(
-            seeThat(PropertyValueFee.getValue(), is(propertyValue)),
+            seeThat(PropertyValueShare.getValue(), is(propertyValue)),
             seeThat(LoanValue.getValue(), is(loanValue)),
-            seeThat(InitialFeeValue.getValue(), is(initialFeeValue)),
+            seeThat(InitialShareValue.getValue(), is(initialFeeValue)),
             seeThat(MinimumIncomeValue.getValue(), is(minimumIncome)));
   }
 }

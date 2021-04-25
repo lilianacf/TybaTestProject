@@ -1,4 +1,4 @@
-package co.com.tyba.question.creditcalculation;
+package co.com.tyba.question;
 
 import co.com.tyba.userinterface.CreditSimulation;
 import net.serenitybdd.screenplay.Actor;
@@ -6,7 +6,7 @@ import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.annotations.Subject;
 import net.thucydides.core.annotations.Step;
 
-@Subject("Confirm property value")
+@Subject("Property value")
 public class PropertyValue implements Question<String> {
 
   @Override

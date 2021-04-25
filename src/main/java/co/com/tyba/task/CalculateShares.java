@@ -1,8 +1,8 @@
 package co.com.tyba.task;
 
-import static co.com.tyba.userinterface.FeeCreditCalculator.BTN_CALCULATE_FEES;
-import static co.com.tyba.userinterface.FeeCreditCalculator.CMB_TERM_IN_YEARS_FEE;
-import static co.com.tyba.userinterface.FeeCreditCalculator.TXT_CREDIT_VALUE;
+import static co.com.tyba.userinterface.ShareCreditCalculator.BTN_CALCULATE_SHARES;
+import static co.com.tyba.userinterface.ShareCreditCalculator.CMB_TERM_IN_YEARS_SHARE;
+import static co.com.tyba.userinterface.ShareCreditCalculator.TXT_CREDIT_VALUE;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
@@ -12,12 +12,12 @@ import net.serenitybdd.screenplay.actions.SendKeys;
 import net.serenitybdd.screenplay.actions.selectactions.SelectByVisibleTextFromTarget;
 import net.thucydides.core.annotations.Step;
 
-public class CalculateFees implements Task {
+public class CalculateShares implements Task {
 
   private long creditValue;
   private String paymentTerm;
 
-  public CalculateFees(long creditValue, String paymentTerm) {
+  public CalculateShares(long creditValue, String paymentTerm) {
     this.creditValue = creditValue;
     this.paymentTerm = paymentTerm;
   }
@@ -27,11 +27,11 @@ public class CalculateFees implements Task {
   public <T extends Actor> void performAs(T actor) {
     actor.attemptsTo(
         SendKeys.of(String.valueOf(creditValue)).into(TXT_CREDIT_VALUE),
-        new SelectByVisibleTextFromTarget(CMB_TERM_IN_YEARS_FEE, paymentTerm),
-        Click.on(BTN_CALCULATE_FEES));
+        new SelectByVisibleTextFromTarget(CMB_TERM_IN_YEARS_SHARE, paymentTerm),
+        Click.on(BTN_CALCULATE_SHARES));
   }
 
-  public static CalculateFees ofCredit(long creditValue, String paymentTerm) {
-    return Tasks.instrumented(CalculateFees.class, creditValue, paymentTerm);
+  public static CalculateShares ofCredit(long creditValue, String paymentTerm) {
+    return Tasks.instrumented(CalculateShares.class, creditValue, paymentTerm);
   }
 }
