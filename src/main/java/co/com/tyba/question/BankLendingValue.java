@@ -7,7 +7,7 @@ import net.serenitybdd.screenplay.annotations.Subject;
 import net.thucydides.core.annotations.Step;
 
 @Subject("Bank loan value")
-public class BankLoanValue implements Question<String> {
+public class BankLendingValue implements Question<String> {
 
   @Override
   @Step("{0} Validate bank loan value")
@@ -15,7 +15,7 @@ public class BankLoanValue implements Question<String> {
     return CreditSimulation.LBL_AMOUNT_LOAN_CREDIT_CALCULATOR.resolveFor(actor).getText();
   }
 
-  public static BankLoanValue getValue() {
-    return new BankLoanValue();
+  public static BankLendingValue getValue() {
+    return new BankLendingValue();
   }
 }

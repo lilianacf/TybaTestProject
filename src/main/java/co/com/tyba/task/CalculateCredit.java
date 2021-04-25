@@ -1,6 +1,6 @@
 package co.com.tyba.task;
 
-import co.com.tyba.userinterface.AmountCreditCalculator;
+import co.com.tyba.userinterface.ValueCreditCalculator;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
@@ -23,9 +23,9 @@ public class CalculateCredit implements Task {
   @Step("{0} enter credit data and calculate ")
   public <T extends Actor> void performAs(T actor) {
     actor.attemptsTo(
-        SendKeys.of(String.valueOf(monthlyIncome)).into(AmountCreditCalculator.TXT_MONTHLY_INCOME),
-        new SelectByVisibleTextFromTarget(AmountCreditCalculator.CMB_TERM_IN_YEARS, paymentTerm),
-        Click.on(AmountCreditCalculator.BTN_CALCULATE_CREDIT));
+        SendKeys.of(String.valueOf(monthlyIncome)).into(ValueCreditCalculator.TXT_MONTHLY_INCOME),
+        new SelectByVisibleTextFromTarget(ValueCreditCalculator.CMB_TERM_IN_YEARS, paymentTerm),
+        Click.on(ValueCreditCalculator.BTN_CALCULATE_CREDIT));
   }
 
   public static CalculateCredit amounts(long monthlyIncome, String paymentTerm) {

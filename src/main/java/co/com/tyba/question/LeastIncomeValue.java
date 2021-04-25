@@ -7,7 +7,7 @@ import net.serenitybdd.screenplay.annotations.Subject;
 import net.thucydides.core.annotations.Step;
 
 @Subject("Monthly share value")
-public class MinimumIncomeValue implements Question<String> {
+public class LeastIncomeValue implements Question<String> {
 
   @Override
   @Step("{0} Validate  monthly share value")
@@ -15,7 +15,7 @@ public class MinimumIncomeValue implements Question<String> {
     return CreditSimulation.LBL_MINIMUM_INCOME.resolveFor(actor).getText();
   }
 
-  public static MinimumIncomeValue getValue() {
-    return new MinimumIncomeValue();
+  public static LeastIncomeValue getValue() {
+    return new LeastIncomeValue();
   }
 }

@@ -7,7 +7,7 @@ import net.serenitybdd.screenplay.annotations.Subject;
 import net.thucydides.core.annotations.Step;
 
 @Subject("Minimum initial share value")
-public class MinimumInitialShareValue implements Question<String> {
+public class LeastInitialShareValue implements Question<String> {
 
   @Override
   @Step("{0} Validate minimum initial share value")
@@ -15,7 +15,7 @@ public class MinimumInitialShareValue implements Question<String> {
     return CreditSimulation.LBL_INITIAL_SHARE_AMOUNT_CALCULATOR.resolveFor(actor).getText();
   }
 
-  public static MinimumInitialShareValue getValue() {
-    return new MinimumInitialShareValue();
+  public static LeastInitialShareValue getValue() {
+    return new LeastInitialShareValue();
   }
 }

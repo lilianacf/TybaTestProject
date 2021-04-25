@@ -1,17 +1,17 @@
 package co.com.tyba.stepdefinition;
 
-import static co.com.tyba.utils.Environments.CREDIT_CALCULATOR;
+import static co.com.tyba.utils.Environment.CREDIT_CALCULATOR;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
-import co.com.tyba.question.BankLoanValue;
+import co.com.tyba.question.BankLendingValue;
 import co.com.tyba.question.InitialShareValue;
-import co.com.tyba.question.LoanValue;
-import co.com.tyba.question.MinimumIncomeValue;
-import co.com.tyba.question.MinimumInitialShareValue;
+import co.com.tyba.question.LeastIncomeValue;
+import co.com.tyba.question.LeastInitialShareValue;
+import co.com.tyba.question.LendingValue;
 import co.com.tyba.question.MonthlyShareValue;
 import co.com.tyba.question.PropertyValue;
 import co.com.tyba.question.PropertyValueShare;
@@ -25,14 +25,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
-public class CreditCalculatorStepDefinition {
+public class CreditCalculatorMetroCuadradoStepDefinition {
 
   @Before
   public void prepareStage() {
     setTheStage(new OnlineCast());
   }
 
-  @Given("^que (.*) está en la calculadora de credito de metrocuadrado$")
+  @Given("^que (.*) está en la calculadora de crédito de metrocuadrado$")
   public void theActorEntersTheCalculatorWebPortal(String actorsName) {
     theActorCalled(actorsName).wasAbleTo(OpenPage.openUrl(CREDIT_CALCULATOR.Url()));
   }
@@ -48,7 +48,7 @@ public class CreditCalculatorStepDefinition {
   }
 
   @Then(
-      "^obtendrá las características de su prestamo con valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y cuota mensual (.*)$")
+      "^obtendrá las características de su préstamo con valores del inmueble (.*), préstamo bancario (.*), cuota inicial (.*) y cuota mensual (.*)$")
   public void heWillKnowTheCreditConditions(
       String propertyValue,
       String bankLoanValue,
@@ -57,8 +57,8 @@ public class CreditCalculatorStepDefinition {
     theActorInTheSpotlight()
         .should(
             seeThat(PropertyValue.getValue(), is(propertyValue)),
-            seeThat(BankLoanValue.getValue(), is(bankLoanValue)),
-            seeThat(MinimumInitialShareValue.getValue(), is(minimumInitialFeeValue)),
+            seeThat(BankLendingValue.getValue(), is(bankLoanValue)),
+            seeThat(LeastInitialShareValue.getValue(), is(minimumInitialFeeValue)),
             seeThat(MonthlyShareValue.getValue(), is(monthlyFeeValue)));
   }
 
@@ -75,8 +75,8 @@ public class CreditCalculatorStepDefinition {
     theActorInTheSpotlight()
         .should(
             seeThat(PropertyValueShare.getValue(), is(propertyValue)),
-            seeThat(LoanValue.getValue(), is(loanValue)),
+            seeThat(LendingValue.getValue(), is(loanValue)),
             seeThat(InitialShareValue.getValue(), is(initialFeeValue)),
-            seeThat(MinimumIncomeValue.getValue(), is(minimumIncome)));
+            seeThat(LeastIncomeValue.getValue(), is(minimumIncome)));
   }
 }

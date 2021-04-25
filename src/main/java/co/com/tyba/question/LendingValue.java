@@ -7,7 +7,7 @@ import net.serenitybdd.screenplay.annotations.Subject;
 import net.thucydides.core.annotations.Step;
 
 @Subject("Loan value")
-public class LoanValue implements Question<String> {
+public class LendingValue implements Question<String> {
 
   @Override
   @Step("{0} Validate loan value")
@@ -15,7 +15,7 @@ public class LoanValue implements Question<String> {
     return CreditSimulation.LBL_AMOUNT_SHARE_CALCULATOR.resolveFor(actor).getText();
   }
 
-  public static LoanValue getValue() {
-    return new LoanValue();
+  public static LendingValue getValue() {
+    return new LendingValue();
   }
 }

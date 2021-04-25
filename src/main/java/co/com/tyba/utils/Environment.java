@@ -1,11 +1,11 @@
 package co.com.tyba.utils;
 
-public enum Environments {
+public enum Environment {
   CREDIT_CALCULATOR("https://www.metrocuadrado.com/calculadora-credito-hipotecario-vivienda/");
 
   private final String url;
 
-  Environments(String url) {
+  Environment(String url) {
     this.url = url;
   }
 

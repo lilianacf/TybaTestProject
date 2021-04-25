@@ -3,7 +3,7 @@ package co.com.tyba.userinterface;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.screenplay.targets.Target;
 
-public class AmountCreditCalculator {
+public class ValueCreditCalculator {
 
   public static final Target TXT_MONTHLY_INCOME =
       Target.the("monthly income").located(By.id("ingresosMensuales"));
