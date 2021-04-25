@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:2.0.70"
+        classpath "gradle.plugin.com.github.sherter.google-java-format:google-java-format-gradle-plugin:0.8"
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: "com.github.sherter.google-java-format"
+
+repositories {
+    mavenCentral()
+}
+
+group 'co.com.tyba'
+version '1.0-SNAPSHOT'
+
+
+sourceCompatibility = 1.8
+
+dependencies {
+    compile "net.serenity-bdd:serenity-cucumber5:2.2.5"
+    compile "net.serenity-bdd:serenity-screenplay:2.1.5"
+    compile "net.serenity-bdd:serenity-screenplay-webdriver:2.1.5"
+    testCompile "net.serenity-bdd:serenity-core:2.1.5"
+    testCompile "net.serenity-bdd:serenity-junit:2.1.5"
+    testCompile 'org.assertj:assertj-core:3.11.1'
+    testCompile 'org.slf4j:slf4j-simple:1.7.25'
+}
+
+compileJava.dependsOn 'googleJavaFormat'
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
